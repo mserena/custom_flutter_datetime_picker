@@ -482,8 +482,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   // Title View
   Widget _renderTitleActionsView(DatePickerTheme theme) {
-    final done = _localeDone();
-    final cancel = _localeCancel();
+    final done = theme.doneText ?? _localeDone();
+    final cancel = theme.cancelText ?? _localeCancel();
 
     return Container(
       height: theme.titleHeight,
