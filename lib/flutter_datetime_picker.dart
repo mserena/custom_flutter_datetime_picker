@@ -2,6 +2,7 @@ library flutter_datetime_picker;
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
@@ -326,7 +327,17 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   Widget _renderPickerView(DatePickerTheme theme) {
-    Widget itemView = _renderItemView(theme);
+    Widget itemView = ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },
+        scrollbars: false,
+      ),
+      child: _renderItemView(theme),
+    );
+
     if (widget.route.showTitleActions == true) {
       return Column(
         children: <Widget>[
